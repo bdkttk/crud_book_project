@@ -3,25 +3,21 @@
 
 ## Uruchomienie lokalne
 
-1. Zainstaluj zależności:
+1. Zależności:
    ```bash
    pip install -r requirements.txt
    ```
-2. Uruchom serwer:
+2. Uruchomić serwer:
    ```bash
    uvicorn main:app --reload
    ```
-3. Otwórz w przeglądarce:
-   [http://127.0.0.1:8000/static/index.html](http://127.0.0.1:8000/static/index.html)
+3. Otwórzyć w przeglądarce
 
-## Render.com
+## railway.com
 
-1. Utwórz nowy projekt na [Render.com](https://render.com)
-2. Podłącz repozytorium z tym projektem
-3. Render automatycznie uruchomi:
-   ```bash
-   ./start.sh
-   ```
+1. Utwórzyć nowy projekt na [railway.com](https://railway.com)
+2. Podłączyć repozytorium z tym projektem
+3. Uruchić projekt
 
 ## Dane przykładowe
 
