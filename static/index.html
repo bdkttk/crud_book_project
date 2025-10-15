@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Book CRUD</title>
+</head>
+<body>
+  <h1>📘 Book CRUD App</h1>
+  <div>
+    <input id="title" placeholder="Title">
+    <input id="author" placeholder="Author">
+    <input id="year" placeholder="Year" type="number">
+    <input type="hidden" id="editId">
+    <button id="addSaveBtn" onclick="addOrSaveBook()">Add</button>
+  </div>
+  <ul id="bookList"></ul>
+
+<script>
+async function loadBooks() {
+  const res = await fetch('/books');
+  const books = await res.json();
+  const list = document.getElementById('bookList');
+  list.innerHTML = '';
+  books.forEach(b => {
+    const li = document.createElement('li');
+    li.innerHTML = `${b.title} by ${b.author} (${b.year}) 
+      <button onclick="deleteBook(${b.id})">Delete</button>
+      <button onclick="startEdit(${b.id}, '${b.title}', '${b.author}', ${b.year})">Edit</button>`;
+    list.appendChild(li);
+  });
+}
+
+function startEdit(id, title, author, year) {
+  document.getElementById('title').value = title;
+  document.getElementById('author').value = author;
+  document.getElementById('year').value = year;
+  document.getElementById('editId').value = id;
+  document.getElementById('addSaveBtn').textContent = "Save";
+}
+
+async function addOrSaveBook() {
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const year = parseInt(document.getElementById('year').value);
+  const editId = document.getElementById('editId').value;
+
+  if (!title || !author || !year) return alert("All fields are required!");
+
+  if (editId) {
+    await fetch(`/books/${editId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, author, year })
+    });
+  } else {
+    await fetch('/books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, author, year })
+    });
+  }
+
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('year').value = '';
+  document.getElementById('editId').value = '';
+  document.getElementById('addSaveBtn').textContent = "Add";
+
+  loadBooks();
+}
+
+async function deleteBook(id) {
+  await fetch(`/books/${id}`, { method: 'DELETE' });
+  loadBooks();
+}
+
+loadBooks();
+</script>
+</body>
+</html>
