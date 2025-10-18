@@ -28,7 +28,6 @@ def init_db():
     cur.execute("SELECT COUNT(*) FROM books")
     if cur.fetchone()[0] == 0:
         cur.executemany("INSERT INTO books (title, author, year) VALUES (?, ?, ?)", [
-            ("1984", "George Orwell", 1949),
             ("A Game of Thrones", "George R. R. Martin", 1996),
             ("Dune", "Frank Herbert", 1965),
             ("The Green Mile", "Stephen King", 1996)
