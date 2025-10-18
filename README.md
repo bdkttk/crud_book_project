@@ -19,10 +19,11 @@
 2. Podłączyć repozytorium z tym projektem
 3. Uruchić projekt
 
+https://crudbookproject-production-4bdb.up.railway.app/
+
 ## Dane przykładowe
 
 W bazie danych znajdują się:
-- *1984* — George Orwell (1949)
 - *A Game of Thrones* — George R. R. Martin (1996)
 - *Dune* — Frank Herbert (1965)
 - *The Green Mile* — Stephen King (1996)
