@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Book CRUD</title>
+  <title>📘 Book CRUD App</title>
 </head>
 <body>
   <h1>📘 Book CRUD App</h1>
@@ -10,9 +10,13 @@
     <input id="title" placeholder="Title">
     <input id="author" placeholder="Author">
     <input id="year" placeholder="Year" type="number">
+    <!-- 🆕 Новые поля -->
+    <input id="genre" placeholder="Genre">
+    <input id="rating" placeholder="Rating" type="number" step="0.1">
     <input type="hidden" id="editId">
     <button id="addSaveBtn" onclick="addOrSaveBook()">Add</button>
   </div>
+
   <ul id="bookList"></ul>
 
 <script>
@@ -23,17 +27,25 @@ async function loadBooks() {
   list.innerHTML = '';
   books.forEach(b => {
     const li = document.createElement('li');
-    li.innerHTML = `${b.title} by ${b.author} (${b.year}) 
+    li.innerHTML = `
+      <strong>${b.title}</strong> by ${b.author} (${b.year}) 
+      — ${b.genre || 'Unknown'}, Rating: ${b.rating ?? '-'}
       <button onclick="deleteBook(${b.id})">Delete</button>
-      <button onclick="startEdit(${b.id}, '${b.title}', '${b.author}', ${b.year})">Edit</button>`;
+      <button onclick="startEdit(${b.id}, '${escapeQuotes(b.title)}', '${escapeQuotes(b.author)}', ${b.year || 0}, '${escapeQuotes(b.genre || '')}', ${b.rating || 0})">Edit</button>`;
     list.appendChild(li);
   });
 }
 
-function startEdit(id, title, author, year) {
+function escapeQuotes(s) {
+  return String(s).replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+function startEdit(id, title, author, year, genre, rating) {
   document.getElementById('title').value = title;
   document.getElementById('author').value = author;
   document.getElementById('year').value = year;
+  document.getElementById('genre').value = genre;
+  document.getElementById('rating').value = rating;
   document.getElementById('editId').value = id;
   document.getElementById('addSaveBtn').textContent = "Save";
 }
@@ -42,27 +54,35 @@ async function addOrSaveBook() {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const year = parseInt(document.getElementById('year').value);
+  const genre = document.getElementById('genre').value;
+  const rating = parseFloat(document.getElementById('rating').value);
   const editId = document.getElementById('editId').value;
 
-  if (!title || !author || !year) return alert("All fields are required!");
+  if (!title || !author || !year || !genre || isNaN(rating)) {
+    return alert("All fields are required!");
+  }
+
+  const body = JSON.stringify({ title, author, year, genre, rating });
 
   if (editId) {
     await fetch(`/books/${editId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, author, year })
+      body
     });
   } else {
     await fetch('/books', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, author, year })
+      body
     });
   }
 
   document.getElementById('title').value = '';
   document.getElementById('author').value = '';
   document.getElementById('year').value = '';
+  document.getElementById('genre').value = '';
+  document.getElementById('rating').value = '';
   document.getElementById('editId').value = '';
   document.getElementById('addSaveBtn').textContent = "Add";
 
