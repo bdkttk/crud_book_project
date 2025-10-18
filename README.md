@@ -1,11 +1,9 @@
-# Projekt CRUD Book (FastAPI + SQLite)
-
+# 📘 Projekt CRUD Book (FastAPI + SQLite)
 
 ## 1. Cel systemu
-
-Niniejszy system stanowi aplikację demonstracyjną typu **CRUD** (Create, Read, Update, Delete), przeznaczoną do zarządzania danymi autorów literackich.  
+Niniejszy system stanowi aplikację demonstracyjną typu **CRUD** (Create, Read, Update, Delete), przeznaczoną do zarządzania danymi książek i autorów literackich.  
 System wykorzystuje środowisko **FastAPI** w języku **Python** oraz bazę danych **SQLite**.  
-Interfejs użytkownika został zaimplementowany w technologii **HTML + JavaScript**.
+Interfejs użytkownika został zaimplementowany w technologii **HTML + JavaScript** (plik `static/index.html`).
 
 ---
 
@@ -13,23 +11,16 @@ Interfejs użytkownika został zaimplementowany w technologii **HTML + JavaScrip
 
 System zapewnia następujące funkcje operacyjne:
 
-- Pobieranie listy wszystkich książek z bazy danych.  
-- Dodawanie nowego książki.  
-- Modyfikowanie istniejącego rekordu książki.  
-- Usuwanie książki.  
-- Automatyczną inicjalizację bazy danych przykładowymi wpisami podczas pierwszego uruchomienia systemu.  
+- Pobieranie listy wszystkich książek z bazy danych  
+- Dodawanie nowej książki  
+- Modyfikowanie istniejącego rekordu książki  
+- Usuwanie książki  
+- Automatyczna inicjalizacja bazy danych przykładowymi wpisami podczas pierwszego uruchomienia systemu  
 
-## railway.com
+---
 
-1. Utwórzyć nowy projekt na [railway.com](https://railway.com)
-2. Podłączyć repozytorium z tym projektem
-3. Uruchić projekt
+## 3. Uruchomienie projektu (lokalnie)
 
-https://crudbookproject-production-4bdb.up.railway.app/
-
-## Dane przykładowe
-
-W bazie danych znajdują się:
-- *A Game of Thrones* — George R. R. Martin (1996)
-- *Dune* — Frank Herbert (1965)
-- *The Green Mile* — Stephen King (1996)
+```bash
+pip install -r requirements.txt
+python main.py
