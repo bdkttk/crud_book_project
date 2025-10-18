@@ -13,10 +13,10 @@ Interfejs użytkownika został zaimplementowany w technologii **HTML + JavaScrip
 
 System zapewnia następujące funkcje operacyjne:
 
-- Pobieranie listy wszystkich autorów z bazy danych.  
-- Dodawanie nowego autora.  
-- Modyfikowanie istniejącego rekordu autora.  
-- Usuwanie autora.  
+- Pobieranie listy wszystkich książek z bazy danych.  
+- Dodawanie nowego książki.  
+- Modyfikowanie istniejącego rekordu książki.  
+- Usuwanie książki.  
 - Automatyczną inicjalizację bazy danych przykładowymi wpisami podczas pierwszego uruchomienia systemu.  
 
 ## railway.com
